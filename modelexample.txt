@@ -1,0 +1,68 @@
+{
+  firstName: "Name",
+  lastName: "SomeOne",
+  job: "Java Developer",
+  city: "CDMX",
+  country: "MX",
+  email: "example@live.com.mx",
+  phoneNumber: "5512345678",
+  skills: [
+    { name: "Java Lenguaje", percentage: 48 },
+    { name: "Solid Works", percentage: 86 },
+  ],
+  languages: [
+    { name: "Spanish (native)", percentage: 100 },
+    { name: "English", percentage: 75 },
+  ],
+  workexperience: [
+    {
+      title: "Java Developer",
+      company: "Some Company",
+      from: "Oct 2019",
+      to: "",
+      current: true,
+      description:
+        "BackEnd usgin springBoot and CloudFoundry services such as PFC",
+    },
+    {
+      title: "Internet of things designer",
+      company: "Some Company",
+      from: "Oct 2019",
+      to: "Jan 2020",
+      current: false,
+      description:
+        "BackEnd using springBoot and CloudFoundry services such as PFC",
+    },
+  ],
+  education: [
+    {
+      name: "Instute, Campus",
+      career: "Career",
+      from: "2011",
+      to: "2015",
+      forever: false,
+      degree: "Bachelor Degree",
+    },
+  ],
+  socialMedia: {
+    facebook: "https://www.facebook.com/",
+    instagram: "https://www.instagram.com/",
+    snapchat: "https://www.snapchat.com/",
+    pinterest: "https://www.pinterest.com.mx/",
+    twitter: "https://twitter.com/tweeter?lang=es",
+    linkedin: "https://mx.linkedin.com/",
+  },
+  challenges: [
+    {
+      name: "String findings",
+      date: "Jan 2020",
+      description: "Some description",
+      url: "https://github.com/at-internship",
+    },
+  ],
+  config: {
+    color: "w3-deep-orange",
+    fontFamily: "Book Antiqua",
+    genericFamily: "italic",
+  },
+}

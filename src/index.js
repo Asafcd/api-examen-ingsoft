@@ -1,27 +1,31 @@
-
-const express = require('express');
+const express = require("express");
 const app = express();
-const morgan=require('morgan');
- 
+const morgan = require("morgan");
+const mongoose = require("mongoose");
+require("dotenv").config();
+
 //Configuraciones
-app.set('port', process.env.PORT || 3000);
-app.set('json spaces', 2)
- 
+app.set("port", process.env.PORT || 3000);
+app.set("json spaces", 2);
+
 //Middleware
-app.use(morgan('dev'));
-app.use(express.urlencoded({extended:false}));
+app.use(morgan("dev"));
+app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
- 
-//Nuestro primer WS Get
-app.get('/', (req, res) => {    
-    res.json(
-        {
-            "Title": "Hola mundo"
-        }
-    );
-})
- 
+app.use("/api", require("./routes/index"));
+
+// Connect to the MongoDB cluster
+try {
+  mongoose.connect(
+    process.env.MONGODB_URI,
+    { useNewUrlParser: true, useUnifiedTopology: true },
+    () => console.log("NOS CONECTAMOS CON MONGOOSE prro")
+  );
+} catch (e) {
+  console.error("algo le paso al mongoose krnal");
+}
+
 //Iniciando el servidor
-app.listen(app.get('port'),()=>{
-    console.log(`Server listening on port ${app.get('port')}`);
+app.listen(app.get("port"), () => {
+  console.log(`Server listening on port ${app.get("port")}`);
 });

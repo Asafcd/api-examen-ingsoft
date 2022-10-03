@@ -56,4 +56,11 @@ const personSchema = mongo.Schema({
     current: Boolean
 })
 
+personSchema.methods.speak = function speak() {
+    const greeting = this.nombre
+      ? "Meow name is " + this.nombre
+      : "I don't have a name";
+    console.log(greeting);
+  };
+
 module.exports = mongo.model('Persona', personSchema)

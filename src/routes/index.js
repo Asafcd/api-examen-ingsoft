@@ -60,8 +60,9 @@ router.get('/remove', async(req,res) =>{
 //update
 router.get('/update', async(req,res) =>{
     const id = req.body.id
-    const data = req.body.firstName
-    const persona = await personSchema.findOneAndUpdate({"_id":id},{"firstName":data})
+    delete req.body.id
+    const data = req.body
+    const persona = await personSchema.findByIdAndUpdate({"_id":id}, data, { runValidators: true, returnOriginal: false})
     obj = {
         "msg" : "user succesfully updated",
         "data" : persona

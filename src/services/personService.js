@@ -1,17 +1,20 @@
+const personSchema = require('../models/persona')
 
-const getAllPersons = async (req, res) => { 
-    return await personSchema.find()
-    
+const getAllPersons = async () => { 
+    try {
+        return await personSchema.find()
+    } catch (err) { throw { status: 500, error: err } }    
 }
 
-const getOnePerson = async (req, res) => {
-    const {id} = req.params
-    await personSchema.findById(id)
-    .then((data) => res.json({msg: "Found it!", persona: data}))
-    .catch((err) => res.json({error: err}))
+const getOnePerson = async (id) => {
+    try{
+        const person = await personSchema.findById(id)
+        if(!person){ throw {status: 400, message: `Can't find person with the id '${id}'`}}
+        return person
+    } catch (err) { throw { status: err?.status || 500, message: err?.message || err } }    
 }
 
-const createPerson = async (req, res) => {
+const createNewPerson = async (req, res) => {
     const persona = new personSchema(req.body)
     await persona.save()
     .then((data) => res.json({id: data._id}))
@@ -31,4 +34,12 @@ const removePerson = async (req, res) => {
     await personSchema.findByIdAndRemove(id)
     .then((data) => res.json({msg: "Person removed succesfully!"}))
     .catch((err)=> res.json({error: err}))
+}
+
+module.exports = {
+    getAllPersons,
+    getOnePerson,
+    createNewPerson,
+    updatePerson,
+    removePerson
 }

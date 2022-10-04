@@ -1,21 +1,35 @@
-const personSchema = require('../models/persona')
+
 const personService = require('../services/personService')
 
 const getAllPersons = async (req, res) => { 
-    await personSchema.find()
-    .then((data) => res.json(data))
-    .catch((err) => res.json({error: err}))
+    try{
+      const allPersons = await personService.getAllPersons()  
+      res.send({status: "OK", data: allPersons})
+    } catch(err){res.status(err?.status || 500).send({ status: "FAILED", data: { error: err?.message || err } });}
+    
+    
 }
 
 const getOnePerson = async (req, res) => {
     const {id} = req.params
-    await personSchema.findById(id)
-    .then((data) => res.json({msg: "Found it!", persona: data}))
-    .catch((err) => res.json({error: err}))
+    if (!id) {
+        res.status(400).send({
+            status: "FAILED",
+            data: { error: "Parameter ':id' can not be empty" },
+    });
+    return;
+  }
+    try{
+        const onePerson = await personService.getOnePerson(id)
+        res.send({ status: "OK!", data: onePerson})
+    } catch(err){ res.status(err?.status || 500).send({ status: "FAIL!", data: {error: err?.message || err}})}
 }
-
+/*
 const createPerson = async (req, res) => {
-    const persona = new personSchema(req.body)
+    if( !body.firstname || !body.lastname ) return
+
+    const persona = req.body
+    const newpersona = personService.createNewPerson(persona)
     await persona.save()
     .then((data) => res.json({id: data._id}))
     .catch((err)=> res.json({error: err}))
@@ -34,12 +48,12 @@ const removePerson = async (req, res) => {
     await personSchema.findByIdAndRemove(id)
     .then((data) => res.json({msg: "Person removed succesfully!"}))
     .catch((err)=> res.json({error: err}))
-}
+} */
 
 module.exports = {
     getAllPersons,
     getOnePerson,
-    createPerson,
+  /*   createPerson,
     updatePerson,
-    removePerson
+    removePerson */
 }

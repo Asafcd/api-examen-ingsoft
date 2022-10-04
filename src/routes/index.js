@@ -6,8 +6,8 @@ const router = express.Router()
 router
     .get('/selectAll', personController.getAllPersons)      //Select all
     .get('/select/:id', personController.getOnePerson)      //Select one
-    .post('/create', personController.createPerson)         //Crear
+  /*  .post('/create', personController.createPerson)         //Crear
     .put('/update/:id', personController.updatePerson)      //Actualizar
-    .delete('/remove/:id', personController.removePerson)   //Eliminar
+    .delete('/remove/:id', personController.removePerson)   //Eliminar */
 
 module.exports = router

@@ -17,7 +17,7 @@ app.use("/api", require("./routes/index"));
 // Connect to the MongoDB cluster
 
   mongoose.connect(
-    "mongodb://127.0.0.1:27017",
+    "mongodb+srv://usuario:hola@cluster0.7tv4frf.mongodb.net/?retryWrites=true&w=majority",
     { useNewUrlParser: true, useUnifiedTopology: true },
     (err) => {
       if(err) console.log(err) 

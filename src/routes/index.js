@@ -6,11 +6,13 @@ const router = express.Router()
 //create
 router.post('/create', async(req,res) =>{
     const persona = new personSchema(req.body)
-    try {
-        await persona.save()  
-        persona.speak()
-    
-    } catch (error) { console.error(error)}
+    const newperson = await persona.save()
+    obj = {
+        "msg" : "user succesfully creaated",
+        "id" : newperson._id,
+        "data" : newperson
+    }
+    res.json(obj)
 })
 
 

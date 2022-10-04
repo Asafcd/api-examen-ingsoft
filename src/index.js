@@ -15,15 +15,16 @@ app.use(express.json());
 app.use("/api", require("./routes/index"));
 
 // Connect to the MongoDB cluster
-try {
+
   mongoose.connect(
-    process.env.MONGODB_URI,
+    "mongodb://127.0.0.1:27017",
     { useNewUrlParser: true, useUnifiedTopology: true },
-    () => console.log("NOS CONECTAMOS CON MONGOOSE prro")
+    (err) => {
+      if(err) console.log(err) 
+      else console.log("mongdb is connected");
+     }
   );
-} catch (e) {
-  console.error("algo le paso al mongoose krnal");
-}
+
 
 //Iniciando el servidor
 app.listen(app.get("port"), () => {

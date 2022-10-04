@@ -14,11 +14,11 @@ const getOnePerson = async (id) => {
     } catch (err) { throw { status: err?.status || 500, message: err?.message || err } }    
 }
 
-const createNewPerson = async (req, res) => {
-    const persona = new personSchema(req.body)
+const createNewPerson = async (person) => {
+    const persona = new personSchema(person)
     await persona.save()
-    .then((data) => res.json({id: data._id}))
-    .catch((err)=> res.json({error: err}))
+        .then((data) => res.json({id: data._id}))
+        .catch((err)=> res.json({error: err}))
 }
 
 const updatePerson = async (req, res) => {

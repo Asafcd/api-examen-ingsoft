@@ -24,17 +24,23 @@ const getOnePerson = async (req, res) => {
         res.send({ status: "OK!", data: onePerson})
     } catch(err){ res.status(err?.status || 500).send({ status: "FAIL!", data: {error: err?.message || err}})}
 }
-/*
+
 const createPerson = async (req, res) => {
-    if( !body.firstname || !body.lastname ) return
-
+    const {body} = req
+    if( !body.firstname || !body.lastname ) {
+        res.status(400).send({ status: "FAIL!", data: {error: "Name or lastName key is missing"}})
+    }
     const persona = req.body
-    const newpersona = personService.createNewPerson(persona)
-    await persona.save()
-    .then((data) => res.json({id: data._id}))
-    .catch((err)=> res.json({error: err}))
+    try {
+        const newPersonaId = personService.createNewPerson(persona)
+        res.send({id: newPersonaId})
+    } catch (error) {
+        
+    }
+    
+   
 }
-
+/*
 const updatePerson = async (req, res) => {
     const {id} = req.params
     const body = req.body

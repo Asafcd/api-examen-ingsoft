@@ -15,25 +15,27 @@ const getOnePerson = async (id) => {
 }
 
 const createNewPerson = async (person) => {
-    const persona = new personSchema(person)
-    await persona.save()
-        .then((data) => res.json({id: data._id}))
-        .catch((err)=> res.json({error: err}))
+    try{
+        const persona = new personSchema(person)
+        const newperson = await persona.save()
+        return newperson._id
+         
+    } catch (error) { throw { status: 500, message: error?.message || error }; }
 }
 
-const updatePerson = async (req, res) => {
-    const {id} = req.params
-    const body = req.body
-    await personSchema.findByIdAndUpdate({"_id":id}, body, { runValidators: true, returnOriginal: false})
-    .then((data) => res.json({"msg" : "user succesfully updated", id: data._id}))
-    .catch((err)=> res.json({error: err}))
+const updatePerson = async (id, body) => {
+    try{
+        const updatedPerson = await personSchema.findByIdAndUpdate(id, body, { runValidators: true, returnOriginal: false})
+        return updatedPerson._id
+    }catch(error){ throw { status: error?.status || 500, message: error?.message || error }}
+    
 }
 
-const removePerson = async (req, res) => {
-    const {id} = req.params
-    await personSchema.findByIdAndRemove(id)
-    .then((data) => res.json({msg: "Person removed succesfully!"}))
-    .catch((err)=> res.json({error: err}))
+const removePerson = async (id) => {
+    try{
+        await personSchema.findByIdAndRemove(id)
+    } catch(error){throw { status: error?.status || 500, message: error?.message || error }}
+    
 }
 
 module.exports = {

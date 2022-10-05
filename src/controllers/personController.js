@@ -27,14 +27,25 @@ const getOnePerson = async (req, res) => {
 const createPerson = async (req, res) => {
     const {firstName, lastName, email, phoneNumber} = req.body
     if( !firstName || !lastName || !email || !phoneNumber) {
-        res.status(400).send({ status: "FAIL!", data: {error: "Name, lastName, email o phone number key is missing"}})
+        return res.status(400).send({ status: "FAIL!", data: {error: "Name, lastName, email or phone number key is missing"}})
     } 
     
     const persona = req.body
-    
-    if(!body(email).isEmail() || !body(firstName).isString() || !body(lastName).isString() || !body(phoneNumber).isNumeric()){
-         const errors = validationResult(req)
-         if (!errors.isEmpty()) { return res.status(400).json({ errors: errors.array() }) }
+
+    if(!typeof firstName == "string"){
+        return res.status(400).send({ satus: "FAIL!", data: {error:"Incorrect First Name"} }) 
+    }
+
+    if(!typeof lastName == "string"){
+        return res.status(400).send({ satus: "FAIL!", data: {error:"Incorrect Last Name"} }) 
+    }
+
+    if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)){
+        return res.status(400).send({ satus: "FAIL!", data: {error:"Not an Email"} }) 
+    }
+
+    if(!typeof phoneNumber == "number"){
+        return res.status(400).send({ satus: "FAIL!", data: {error:"Incorrect Phone Number"} }) 
     }
 
     try {

@@ -4,10 +4,10 @@ const personController = require('../controllers/personController')
 const router = express.Router()
 
 router
-    .get('/selectAll', personController.getAllPersons)      //Select all
-    .get('/select/:id', personController.getOnePerson)      //Select one
-    .post('/create', personController.createPerson)         //Crear
-    .put('/update/:id', personController.updatePerson)      //Actualizar
-    .delete('/remove/:id', personController.removePerson)   //Eliminar 
+    .get('/resumes', personController.getAllPersons)      //Select all
+    .get('/resumes/:id', personController.getOnePerson)      //Select one
+    .post('/resumes', personController.createPerson)         //Crear
+    .put('/resumes/:id', personController.updatePerson)      //Actualizar
+    .delete('/resumes/:id', personController.removePerson)   //Eliminar 
 
 module.exports = router

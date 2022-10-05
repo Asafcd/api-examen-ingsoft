@@ -8,8 +8,9 @@ const getAllPersons = async () => {
 
 const getOnePerson = async (id) => {
     try{
+        if(id.length != 24){ throw { status: 400, message: `Not an id`}}
         const person = await personSchema.findById(id)
-        if(!person){ throw {status: 400, message: `Can't find person with the id '${id}'`}}
+        if(!person){ throw {status: 404, message: `Can't find person with the id '${id}'`}}
         return person
     } catch (err) { throw { status: err?.status || 500, message: err?.message || err } }    
 }

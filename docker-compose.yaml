@@ -1,0 +1,10 @@
+
+version: '3'
+
+services:
+   uel-server:
+      build: .
+      volumes:
+      - ./src:/usr/src
+      ports:
+      - 8080:80 #Externo:Interno

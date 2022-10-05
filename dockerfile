@@ -4,7 +4,7 @@ RUN mkdir -p /usr/src
 WORKDIR /usr/src
 
 
-COPY package*.json /usr/src
+COPY package*.json /usr/
 
 RUN npm install
 # If you are building your code for production

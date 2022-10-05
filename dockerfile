@@ -1,7 +1,7 @@
 FROM node:16
 
 RUN mkdir -p /usr/src
-WORKDIR /usr/src
+WORKDIR /usr/
 
 
 COPY package*.json /usr/
@@ -14,4 +14,4 @@ RUN npm install
 COPY . .
 #expose es el puerto y debe coindicid con el EXTERNO de docker
 EXPOSE 80
-CMD [ "node", "./index.js" ]
+CMD [ "node", "./scr/index.js" ]

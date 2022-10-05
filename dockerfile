@@ -1,10 +1,10 @@
 FROM node:16
 
-RUN mkdir -p /usr/app/src
-WORKDIR /usr/app
+RUN mkdir -p /usr/src
+WORKDIR /usr/src
 
 
-COPY package*.json /usr/app/
+COPY package*.json /usr/src
 
 RUN npm install
 # If you are building your code for production

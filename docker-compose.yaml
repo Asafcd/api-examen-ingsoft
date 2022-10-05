@@ -5,6 +5,6 @@ services:
    uel-server:
       build: .
       volumes:
-      - ./src:/usr/
+      - ./src:/usr/src
       ports:
       - 80:80 #Externo:Interno

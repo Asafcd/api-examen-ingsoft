@@ -14,4 +14,4 @@ RUN npm install
 COPY . .
 #expose es el puerto y debe coindicid con el EXTERNO de docker
 EXPOSE 80
-CMD [ "node", "./src/index.js" ]
+CMD [ "node", "./index.js" ]

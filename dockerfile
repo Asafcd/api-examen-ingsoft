@@ -1,6 +1,6 @@
 FROM node:16
 
-RUN mkdir -p /usr/src
+RUN mkdir -p /usr/
 WORKDIR /usr/
 
 

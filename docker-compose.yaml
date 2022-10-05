@@ -7,4 +7,4 @@ services:
       volumes:
       - ./src:/usr/src
       ports:
-      - 8080:80 #Externo:Interno
+      - 80:80 #Externo:Interno
